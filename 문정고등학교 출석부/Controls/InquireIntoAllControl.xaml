@@ -1,0 +1,154 @@
+﻿<UserControl x:Class="문정고등학교_출석부.InquireIntoAllControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:문정고등학교_출석부"
+             Background="White"
+             mc:Ignorable="d" 
+             d:DesignHeight="670" d:DesignWidth="1080" Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <Style x:Key="TitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#2E64FE"></Setter>
+        </Style>
+
+        <Style x:Key="ElementTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="Padding" Value="8, 0, 8, 0"></Setter>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+        </Style>
+
+        <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <Viewbox Height="400"
+                         Width="400">
+                            <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="2" Style="{StaticResource TitleStyle}" Margin="10, 10, 10, 0" Foreground="DarkBlue">전교 근태 불량자 조회 (기간)</TextBlock>
+
+        <Border Grid.ColumnSpan="2" Grid.Row="1" Background="#FFF1F6FF" Margin="10" BorderBrush="#FFBFBFBF" BorderThickness="1">
+            <DockPanel HorizontalAlignment="Stretch" LastChildFill="False">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="7">
+                    <TextBlock Margin="4, 0, 6, 0" Style="{StaticResource ElementTextStyle}">기간</TextBlock>
+                    <DatePicker Name="FirstDateControl" Width="130" CalendarStyle="{StaticResource CalendarStyle}" Style="{StaticResource DatePickerStyle}"></DatePicker>
+                    <TextBlock Margin="10, 0, 10, 0" Style="{StaticResource ElementTextStyle}">~</TextBlock>
+                    <DatePicker Name="SecondDateControl" Width="130" Margin="0, 0, 20, 0" CalendarStyle="{StaticResource CalendarStyle}" Style="{StaticResource DatePickerStyle}"></DatePicker>
+                    <TextBlock Style="{StaticResource ElementTextStyle}">조회 후 왼편에 나타나는 학생 명단에서 학생을 더블클릭하십시오.</TextBlock>
+                </StackPanel>
+
+                <Button Name="Inquire" DockPanel.Dock="Right" Margin="0, 0, 10, 0" Style="{StaticResource ButtonStyle}" Click="Inquire_Click">조회</Button>
+            </DockPanel>
+        </Border>
+
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="2" LastChildFill="False" Margin="10, 0, 10, 10">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <TextBlock Style="{StaticResource ElementTextStyle}">현재 조회된 기간 :</TextBlock>
+                <TextBlock Style="{StaticResource ElementTextStyle}" FontWeight="Bold" Name="InquiredText">- ~ -</TextBlock>
+                <TextBlock Style="{StaticResource ElementTextStyle}" Name="SelectedStudentText" Margin="20, 0, 0, 0" FontWeight="Bold" Foreground="Green"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Name="ToExcel" Style="{StaticResource ButtonStyle}" IsEnabled="False" Click="ToExcel_Click">모든 학생 벌점을 엑셀로 저장</Button>
+            </StackPanel>
+        </DockPanel>
+
+        <DataGrid Name="StuDataGrid" Grid.Row="3" Grid.Column="0" Background="White" Margin="0, 0, 3, 0" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="학년" Binding="{Binding Path=Grade}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="반" Binding="{Binding Path=Class}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="번호" Binding="{Binding Path=Number}" IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Width="2*" Header="성명" Binding="{Binding Path=Name}" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+
+        <DataGrid Name="FaultsDataGrid" Grid.Row="3" Grid.Column="1" Background="White" Margin="0, 0, 0, 0" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="구분" Binding="{Binding 구분}"></DataGridTextColumn>
+
+                <DataGridTextColumn Width="2*" Header="일자" Binding="{Binding 일자}"></DataGridTextColumn>
+
+                <DataGridTextColumn Width="5*" Header="해당 사항" Binding="{Binding 해당사항}"></DataGridTextColumn>
+
+                <DataGridTextColumn Width="*" Header="벌점" Binding="{Binding 벌점}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GridSplitter Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="DarkGray" ShowsPreview="True" Width="3"></GridSplitter>
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,148 @@
+﻿<Window x:Class="문정고등학교_출석부.WorkWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:문정고등학교_출석부"
+        mc:Ignorable="d" Icon="/Resources/Book.png" Loaded="Window_Loaded" Closing="Window_Closing"
+        Title="문정고등학교 출석부" Height="720" Width="1280">
+
+    <Window.Resources>
+        <Style x:Key="BarFont" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Gray"></Setter>
+            <Setter Property="FontFamily" Value="Malgun Gothic"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style x:Key="MenuFont" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Margin" Value="0, 6, 12, 0"></Setter>
+            <Setter Property="Foreground" Value="#FF4D4D4D"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="TextAlignment" Value="Right"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property ="IsMouseOver" Value="True">
+                    <Setter Property= "Foreground" Value="#FF9C9C9C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ClassTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="#FF4D4D4D"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Width="200" HorizontalAlignment="Stretch">
+            <Border HorizontalAlignment="Stretch" Background="#FFF1F6FF" Padding="10">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="3" ShadowDepth="1"></DropShadowEffect>
+                </Border.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <ComboBox Name="GradeCombo" Style="{StaticResource ComboBoxStyle}" Margin="5" Width="45">
+                        <ComboBoxItem Content="1" IsSelected="True"></ComboBoxItem>
+                        <ComboBoxItem Content="2"></ComboBoxItem>
+                        <ComboBoxItem Content="3"></ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock Style="{StaticResource ClassTextStyle}" Margin="5">학년</TextBlock>
+                    <ComboBox Name="ClassCombo" Style="{StaticResource ComboBoxStyle}" Margin="5" Width="45">
+                        <ComboBoxItem Content="1" IsSelected="True"></ComboBoxItem>
+                        <ComboBoxItem Content="2"></ComboBoxItem>
+                        <ComboBoxItem Content="3"></ComboBoxItem>
+                        <ComboBoxItem Content="4"></ComboBoxItem>
+                        <ComboBoxItem Content="5"></ComboBoxItem>
+                        <ComboBoxItem Content="6"></ComboBoxItem>
+                        <ComboBoxItem Content="7"></ComboBoxItem>
+                        <ComboBoxItem Content="8"></ComboBoxItem>
+                        <ComboBoxItem Content="9"></ComboBoxItem>
+                        <ComboBoxItem Content="10"></ComboBoxItem>
+                        <ComboBoxItem Content="11"></ComboBoxItem>
+                        <ComboBoxItem Content="12"></ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock Style="{StaticResource ClassTextStyle}" Margin="5">반</TextBlock>
+                </StackPanel>
+            </Border>
+            <TextBlock Name="AttendanceByClassText" MouseDown="AttendanceByClassText_MouseDown" Style="{StaticResource MenuFont}" Text="교과 시간별 출결 관리"></TextBlock>
+            <TextBlock Name="AttendanceByDayText" MouseDown="AttendanceByDayText_MouseDown" Style="{StaticResource MenuFont}" Text="일일 출결 관리"></TextBlock>
+            <TextBlock Name="InquireIntoAbsenteesText" MouseDown="InquireIntoAbsenteesText_MouseDown" Style="{StaticResource MenuFont}" Text="일일 근태 불량자 조회"></TextBlock>
+            <TextBlock Name="InquireIntoIndividualText" MouseDown="InquireIntoIndividualText_MouseDown" Style="{StaticResource MenuFont}" Text="개인별 벌점 조회"></TextBlock>
+            <TextBlock Name="InquireIntoOverRefText" MouseDown="InquireIntoOverRefText_MouseDown" Style="{StaticResource MenuFont}" Text="기준 벌점 이상자 조회"></TextBlock>
+            <TextBlock Name="StuListText" MouseDown="StuListText_MouseDown"  Style="{StaticResource MenuFont}" Text="학생 명단 관리"></TextBlock>
+
+            <Border Name="MenuSeparater" Height="20" Grid.Row="0" Grid.ColumnSpan="2" Background="White" BorderBrush="Gray" BorderThickness="0, 0, 0, 1"></Border>
+            
+            <TextBlock Name="UnacceptedAccountsText" MouseDown="UnacceptedAccountsText_MouseDown"  Style="{StaticResource MenuFont}" Text="회원가입 신청 목록 관리"></TextBlock>
+            <TextBlock Name="AcceptedAccountsText" MouseDown="AcceptedAccountsText_MouseDown"  Style="{StaticResource MenuFont}" Text="허가된 계정 목록 조회"></TextBlock>
+            <TextBlock Name="InquireIntoAllText" MouseDown="InquireIntoAllText_MouseDown"  Style="{StaticResource MenuFont}" FontSize="13" Text="전교 근태 불량자 조회 (기간)"></TextBlock>
+            <!--TextBlock Name="ClearDatabaseText" MouseDown="ClearDatabaseText_MouseDown"  Style="{StaticResource MenuFont}" FontSize="13" Text="데이터베이스 초기화"></-->
+        </StackPanel>
+
+        <GridSplitter Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="DarkGray" IsEnabled="False" Width="3"></GridSplitter>
+
+        <local:AttendanceByClassControl x:Name="AttByClass" Grid.Row="1" Grid.Column="1"></local:AttendanceByClassControl>
+        <local:AttendanceByDayControl x:Name="AttByDay" Grid.Row="1" Grid.Column="1"></local:AttendanceByDayControl>
+        <local:InquireIntoAbsenteesControl x:Name="InqAbsentees" Grid.Row="1" Grid.Column="1"></local:InquireIntoAbsenteesControl>
+        <local:InquireIntoIndividualControl x:Name="InqIndividual" Grid.Row="1" Grid.Column="1"></local:InquireIntoIndividualControl>
+        <local:InquireIntoOverRefControl x:Name="InqOver" Grid.Row="1" Grid.Column="1"></local:InquireIntoOverRefControl>
+        <local:StuListControl x:Name="StuList" Grid.Row="1" Grid.Column="1"></local:StuListControl>
+        <local:UnacceptedAccountsControl x:Name="Accounts" Grid.Row="1" Grid.Column="1"></local:UnacceptedAccountsControl>
+        <local:AcceptedAccountsControl x:Name="AcceptedAccounts" Grid.Row="1" Grid.Column="1"></local:AcceptedAccountsControl>
+        <local:InquireIntoAllControl x:Name="InqAll" Grid.Row="1" Grid.Column="1"></local:InquireIntoAllControl>
+        
+        <Border Grid.ColumnSpan="2" Height="50" Background="#FFEEEEF2">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="3" ShadowDepth="1"></DropShadowEffect>
+            </Border.Effect>
+            <DockPanel LastChildFill="False">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <Image Source="/Resources/Book.png" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"></Image>
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Margin="15, 0, 0, 0" FontSize="25" Style="{StaticResource BarFont}">문정고등학교 출석부</TextBlock>
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Bottom" Margin="15, 0, 0, 15" FontSize="10" Style="{StaticResource BarFont}" FontStyle="Italic" Name="VersionText">*.*.*.*</TextBlock>
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0, 15" FontSize="10" Style="{StaticResource BarFont}" FontStyle="Italic">, Developed By 제 9회 졸업생 김정현</TextBlock>
+                </StackPanel>
+
+                <Grid DockPanel.Dock="Right" Margin="0, 0, 10, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.RowSpan="2" Source="/Resources/User.png" RenderOptions.BitmapScalingMode="HighQuality" Margin="5"></Image>
+
+                    <TextBlock Name="NameText" Grid.Column="1" VerticalAlignment="Bottom" FontWeight="Bold" Style="{StaticResource BarFont}" Text="&lt;교사 이름&gt;"></TextBlock>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Bottom" FontWeight="Bold" Style="{StaticResource BarFont}" Margin="5, 0, 0, 0">선생님</TextBlock>
+                    <TextBlock Name="TypeText" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource BarFont}">1 - 1 담임</TextBlock>
+                </Grid>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

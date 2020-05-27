@@ -1,0 +1,57 @@
+﻿<Window x:Class="문정고등학교_출석부.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:문정고등학교_출석부"
+        mc:Ignorable="d" Icon="/Resources/Book.png"
+        Title="문정고등학교 출석부" Height="700" Width="450" ResizeMode="NoResize"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid KeyDown="EnterKeyDown">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.ColumnSpan="3" Source="/Resources/Book.png" RenderOptions.BitmapScalingMode="HighQuality"  Margin="70">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="7" ShadowDepth="2"></DropShadowEffect>
+            </Image.Effect>
+        </Image>
+        
+        <StackPanel Margin="30, 10, 30, 0" Grid.Row="1" Grid.ColumnSpan="3" Orientation="Vertical">
+            <TextBlock Foreground="Gray" FontWeight="Bold" FontSize="18" Text="교사 ID" Margin="0, 0, 0, 5"></TextBlock>
+            <TextBox Name="IDText" KeyDown="EnterKeyDown" FontSize="18" Height="40" VerticalContentAlignment="Center"></TextBox>
+        </StackPanel>
+
+        <StackPanel Margin="30, 10, 30, 0" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Vertical">
+            <TextBlock Foreground="Gray" FontWeight="Bold" FontSize="18" Text="비밀번호" Margin="0, 0, 0, 5"></TextBlock>
+            <PasswordBox Name="PWText" KeyDown="EnterKeyDown" FontSize="18" Height="40" VerticalContentAlignment="Center"></PasswordBox>
+        </StackPanel>
+
+        <CheckBox Name="SaveIDCheck" Checked="SaveIDCheck_Checked" Unchecked="SaveIDCheck_Unchecked" Grid.Row="3" Grid.ColumnSpan="3" Margin="30, 15, 0, 15">ID 저장</CheckBox>
+
+        <Button Name="LogInButton" Click="LogInButton_Click" Grid.Row="4" Grid.ColumnSpan="3" Height="45" Margin="25, 0, 25, 3" Background="Transparent" BorderBrush="Gray">
+            <Label FontSize="18">Log In</Label>
+        </Button>
+
+        <Button Name="Register" Grid.ColumnSpan="3" Grid.Row="5" Grid.Column="0" Height="25" Background="Transparent" BorderBrush="Gray" Margin="25, 0, 25, 15" Click="Register_Click">교사 회원 가입</Button>
+
+        <Image Name="StateImage" Grid.Row="6" Grid.Column="0" Height="70" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Success.png" Margin="5"></Image>
+        <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock Name="StateDescribeText">-</TextBlock>
+            <TextBlock Name="IPEndPointText">-</TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
